@@ -1,5 +1,6 @@
 package com.atguigu.admin.interceptor;
 
+import com.atguigu.admin.bean.User;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
@@ -33,9 +34,11 @@ public class LoginInterceptor implements HandlerInterceptor {
         //登录检查逻辑
         HttpSession session = request.getSession();
 
-        Object loginUser = session.getAttribute("loginUser");
+        User loginUser = (User) session.getAttribute("loginUser");
+
 
         if(loginUser != null){
+            log.info("用户参数是{}",loginUser.getUserName());
             //放行
             return true;
         }
